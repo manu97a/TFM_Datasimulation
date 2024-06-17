@@ -19,7 +19,7 @@ class MiVentana(QMainWindow):
     def __init__(self):
         super().__init__()
         loader = QUiLoader()
-        self.ui = loader.load("ejemplo.ui")
+        self.ui = loader.load("InterfazGUI.ui")
         self.setCentralWidget(self.ui)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
        
@@ -476,6 +476,7 @@ class MiVentana(QMainWindow):
                 # ------------------------------ #
                 self.sensorica = self.simularSensores();
                 print("Esto es sensoricA",self.sensorica)
+                self.client.publish("TFM_Sensores",json.dumps(self.sensorica),qos=1)
                 # Enviar a base de datos
                 data_database = {
                     "Luces": self.estadoLucesDB,
